@@ -1,0 +1,33 @@
+body{
+	font-family: 'Lato', sans-serif;
+}
+
+.no-float{
+	float: none;
+}
+
+.espacio-arriba{
+	margin-top: 80px;
+}
+
+.Lato{
+	font-family: 
+}
+
+.grande{
+	font-size: 2em;
+}
+
+.Righ{
+	font-family: 'Righteous', cursive;
+}
+
+.verde{
+	color: #00FF72;
+}
+
+a{
+	float: none;
+	display: inline-block;
+	margin-right: -4px;
+}
