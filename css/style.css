@@ -7,11 +7,11 @@ body{
 }
 
 .espacio-arriba{
-	margin-top: 80px;
+	margin-top: 10px;
 }
 
-.Lato{
-	font-family: 
+.vete-arriba{
+	vertical-align: top;
 }
 
 .grande{
@@ -26,7 +26,7 @@ body{
 	color: #00FF72;
 }
 
-a{
+.inline-block{
 	float: none;
 	display: inline-block;
 	margin-right: -4px;
