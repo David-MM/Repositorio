@@ -1,5 +1,37 @@
+
 .App {
   text-align: center;
+  margin-top: 30px;
+}
+
+.cafe{
+  color: #3F5666;
+}
+
+.no-float{
+  float: none;
+}
+
+.vete-arriba{
+  vertical-align: top;
+}
+
+.verde{
+  color: #3E606F;
+}
+
+.grande{
+  font-size: 2em;
+}
+
+.Righ{
+  font-family: 'Righteous', cursive;
+}
+
+.inline-block{
+  float: none;
+  display: inline-block;
+  margin-right: -4px;
 }
 
 
