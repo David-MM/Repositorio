@@ -1,0 +1,26 @@
+{
+	"listas": [
+		{
+			"codigo": "0001",
+			"nombre": "Manteca",
+			"descripcion": "Rica en grasa",
+			"precio": "22",
+			"unidades": "10"
+		},
+		{
+			"codigo": "0002",
+			"nombre": "Leche",
+			"descripcion": "Con mucho calcio",
+			"precio": "19",
+			"unidades": "15"
+		},
+		{
+			"codigo": "0003",
+			"nombre": "Fresa",
+			"descripcion": "Fruta saludable",
+			"precio": "30",
+			"unidades": "9"
+		}
+	]
+
+}
