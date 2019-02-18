@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import {listas} from './listas.json';
 import Formulario from './componets/Formulario';
+import Lista from './componets/Lista';
+import firebase from 'firebase';
+import from 'firebase/datebase';
+import {DB} from './config/config';
 
 
 class App extends Component {
   constructor(){
     super();
-    this.state = {listas};
+    this.state = {
+      listas[
+
+      ]
+    };
     this.agregarEnvio = this.agregarEnvio.bind(this);
   }
 
@@ -19,15 +25,14 @@ class App extends Component {
   }
 
   render() {
-    const listas = this.state.listas.map((lista, i) => {
+    const listas = this.state.listas.map((lista) => {
       return(
-        <tr>
-          <td>{lista.codigo}</td>
-          <td>{lista.nombre}</td>
-          <td>{lista.descripcion}</td>
-          <td>{lista.precio}</td>
-          <td>{lista.unidades}</td>
-        </tr>
+        <Lista Codigo={lista.codigo}
+                Name={lista.nombre}
+                Descripcion={lista.descripcion}
+                Precio= {lista.precio}
+                Cantidad= {lista.cantidad}
+                key={lista.length}/>
       )
     })
     return (
