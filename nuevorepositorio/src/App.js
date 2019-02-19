@@ -2,26 +2,45 @@ import React, { Component } from 'react';
 import './App.css';
 import Formulario from './componets/Formulario';
 import Lista from './componets/Lista';
+
 import firebase from 'firebase';
-import from 'firebase/datebase';
 import {DB} from './config/config';
+/*import 'firebase/datebase';*/
+
 
 
 class App extends Component {
   constructor(){
     super();
     this.state = {
-      listas[
-
-      ]
+      listas: []
     };
+
+    this.app = firebase.initializeApp(DB);
+    this.bd = this.app.datebase().ref().child ('listas');
+
     this.agregarEnvio = this.agregarEnvio.bind(this);
   }
 
+  componentDidMount() {
+    let { listas } = this.state;
+    this.bd.on('child_added', nota => {
+        listas.push({
+          codigo: nota.key,
+          nombre: nota.val().nombre,
+          descripcion: nota.val().descripcion,
+          precio: nota.val().precio,
+          cantidad: nota.val().cantidad
+        });
+        this.setState({listas});
+      });
+    }
+
   agregarEnvio(lista){
-    this.setState({
+    /*this.setState({
       listas: [...this.state.listas, lista]
-    })
+    })*/
+    this.bd.push().set({listas: lista});
   }
 
   render() {

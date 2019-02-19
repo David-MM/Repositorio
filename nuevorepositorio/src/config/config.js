@@ -1,4 +1,4 @@
-export const DB{
+export const DB = {
 	apiKey: "AIzaSyDmG00HeNS7xM2_5lDROsKmy8RiLhSAjVw",
     authDomain: "repositorio-13597.firebaseapp.com",
     databaseURL: "https://repositorio-13597.firebaseio.com",
