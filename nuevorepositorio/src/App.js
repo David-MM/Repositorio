@@ -4,10 +4,17 @@ import Formulario from './componets/Formulario';
 import Lista from './componets/Lista';
 
 import firebase from 'firebase';
-import {DB} from './config/config';
-/*import 'firebase/datebase';*/
+// import 'firebase/datebase';
 
-
+const DB = { 
+  apiKey: "AIzaSyDmG00HeNS7xM2_5lDROsKmy8RiLhSAjVw",
+    authDomain: "repositorio-13597.firebaseapp.com",
+    databaseURL: "https://repositorio-13597.firebaseio.com",
+    projectId: "repositorio-13597",
+    storageBucket: "repositorio-13597.appspot.com",
+    messagingSenderId: "107911171812"
+}
+firebase.initializeApp(DB)
 
 class App extends Component {
   constructor(){
@@ -15,43 +22,35 @@ class App extends Component {
     this.state = {
       listas: []
     };
-
-    this.app = firebase.initializeApp(DB);
-    this.bd = this.app.datebase().ref().child ('listas');
-
+    this.conect = firebase.datebase().ref().child('listas');
     this.agregarEnvio = this.agregarEnvio.bind(this);
   }
 
   componentDidMount() {
-    let { listas } = this.state;
-    this.bd.on('child_added', nota => {
+    const listas  = this.state.listas;
+    
+    this.conect.on('child_added', (snap) => {
         listas.push({
-          codigo: nota.key,
-          nombre: nota.val().nombre,
-          descripcion: nota.val().descripcion,
-          precio: nota.val().precio,
-          cantidad: nota.val().cantidad
-        });
-        this.setState({listas});
-      });
-    }
+          codigo: snap.key,
+          nombre: snap.val().nombre
+        })
+        this.setState({ listas });
+      })
+  }
 
-  agregarEnvio(lista){
-    /*this.setState({
-      listas: [...this.state.listas, lista]
-    })*/
-    this.bd.push().set({listas: lista});
+  agregarEnvio(listas){
+    this.conect.push().set(listas);
   }
 
   render() {
-    const listas = this.state.listas.map((lista) => {
+    const listas = this.state.listas.map((listas) => {
       return(
-        <Lista Codigo={lista.codigo}
-                Name={lista.nombre}
-                Descripcion={lista.descripcion}
-                Precio= {lista.precio}
-                Cantidad= {lista.cantidad}
-                key={lista.length}/>
+        <Lista Codigo={listas.codigo}
+                Name={listas.nombre}
+                Descripcion={listas.descripcion}
+                Precio= {listas.precio}
+                Cantidad= {listas.cantidad}
+                key={listas.length}/>
       )
     })
     return (
