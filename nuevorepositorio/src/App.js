@@ -3,7 +3,7 @@ import './App.css';
 import Formulario from './componets/Formulario';
 import Lista from './componets/Lista';
 
-import firebase from 'firebase';
+import * as firebase from 'firebase';
 // import 'firebase/datebase';
 
 const DB = { 
@@ -22,41 +22,52 @@ class App extends Component {
     this.state = {
       listas: []
     };
-    this.conect = firebase.datebase().ref().child('listas');
+    
     this.agregarEnvio = this.agregarEnvio.bind(this);
   }
 
-  componentDidMount() {
-    const listas  = this.state.listas;
-    
-    this.conect.on('child_added', (snap) => {
-        listas.push({
-          codigo: snap.key,
-          nombre: snap.val().nombre
+  Leer(){
+    firebase.database().ref('lista/').once('value').then((date) => {
+      let ListaId = []
+      const obj = date.val()
+      for(let ids in obj)
+      {
+        ListaId.push({
+          id: ids,
+          codigo: obj[ids].codigo,
+          nombre: obj[ids].nombre,
+          descripcion: obj[ids].descripcion,
+          precio: obj[ids].precio,
+          unidades: obj[ids].unidades
         })
-        this.setState({ listas });
-      })
+      }
+      this.setState({listas: ListaId})
+    })
+  }
+
+  componentDidMount() {
+    this.Leer()
   }
 
   agregarEnvio(listas){
-    this.conect.push().set(listas);
+    firebase.database().ref('lista/').push(listas)
+    this.Leer()
   }
 
   render() {
-    const listas = this.state.listas.map((listas) => {
-      return(
-        <Lista Codigo={listas.codigo}
-                Name={listas.nombre}
-                Descripcion={listas.descripcion}
-                Precio= {listas.precio}
-                Cantidad= {listas.cantidad}
-                key={listas.length}/>
-      )
-    })
+    const mappingDate = n =>(
+      <Lista Codigo={n.codigo}
+              Name={n.nombre}
+              Descripcion={n.descripcion}
+              Precio= {n.precio}
+              Cantidad= {n.cantidad}
+              Unidades= {n.unidades}
+              key={n.id}/>
+    )
     return (
       <div className="App">
         <h1 className="text-center cafe">Repositorio</h1>
-        <Formulario onAgregar = {this.agregarEnvio} />
+        <Formulario onAgregar = {this.agregarEnvio}/>
         <section className="col-md-8 inline-block Righ vete-arriba">
           <h2 className="verde">Lista</h2>
           <table className="table">
@@ -70,7 +81,7 @@ class App extends Component {
               </tr>
             </thead>
             <tbody>
-              {listas}
+              {this.state.listas.map(mappingDate)}
             </tbody>
           </table>
         </section>
